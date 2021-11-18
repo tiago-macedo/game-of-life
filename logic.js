@@ -85,27 +85,19 @@ function step() {
             pack = Array(3).fill(Array(3).fill(false))
 
             if (y > 0) { // We're not on the top row
-                pack[0][1] = cells[y-1][x].active
-                if (x > 0) {
-                    pack[0][0] = cells[y-1][x-1].active
-                }
-                if (x < width-1) {
-                    pack[0][2] = cells[y-1][x+1].active
-                }
+                if (x > 0)       pack[0][0] = cells[y-1][x-1].active
+                                 pack[0][1] = cells[y-1][ x ].active
+                if (x < width-1) pack[0][2] = cells[y-1][x+1].active
             }
             
-            pack[1][0] = x > 0 ? cells[y][x-1].active : false
-            pack[1][1] = cells[y][x].active
-            pack[1][2] = x < width-1 ? cells[y][x+1].active : false
+            if (x > 0)       pack[1][0] = cells[y][x-1].active
+                             pack[1][1] = cells[y][ x ].active
+            if (x < width-1) pack[1][2] = cells[y][x+1].active
 
             if (y < height-1) { // We're not on the bottom row
-                pack[2][1] = cells[y+1][x].active
-                if (x > 0) {
-                    pack[2][0] = cells[y+1][x-1].active
-                }
-                if (x < width-1) {
-                    pack[2][2] = cells[y+1][x+1].active
-                }
+                if (x > 0)       pack[2][0] = cells[y+1][x-1].active
+                                 pack[2][1] = cells[y+1][ x ].active
+                if (x < width-1) pack[2][2] = cells[y+1][x+1].active
             }
 
             if (x == 1 && y == 1) {
