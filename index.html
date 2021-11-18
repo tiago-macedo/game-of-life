@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>
+            Jogo da Vida
+        </title>
+
+        <link rel="stylesheet" href="style.css" />
+        <script src="p5.js" defer></script>
+        <script src="logic.js" defer></script>
+    </head>
+
+    <body>
+        <main>
+            <div id="field"></div>
+
+            <div id="panel">
+                <label for="width">Largura</label> <br />
+                <input
+                    type="number"
+                    name="width"
+                    id="width"
+                    value="64"
+                    min="1"
+                    onchange="reload()"
+                /> <br />
+                <label for="height">Altura</label> <br />
+                <input
+                    type="number"
+                    name="height"
+                    id="height"
+                    value="16"
+                    min="1"
+                    onchange="reload()"
+                /> <br />
+                <input type="button" id="play-pause" value="[⏯] play/pause" /> <br />
+            </div>
+        </main>
+    </body>
+</html>
