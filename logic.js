@@ -128,7 +128,7 @@ function step() {
 // middle cell.
 function update(states) {
     current = states[1][1]
-    states[2][2] = false
+    states[1][1] = false
     total = states.flat().reduce((sum, state) => sum + state, 0)
     // The rules of the game!
     if      ( current  && total  < 2 ) return false // Death by loneliness
