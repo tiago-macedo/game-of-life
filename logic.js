@@ -12,20 +12,16 @@ reload();
 function cell() {
     const c = document.createElement("div")
     c.classList.add("cell")
-    c.addEventListener("onmouseover", turn_on)
+    c.addEventListener("mouseover", turn_on)
     return c
 }
 
 function turn_on(event) {
-    // [FIXME]
-    // WHY WON'T THINS FUNCTION WORK?????
-    console.log("aaaaa")
-    event.target.style.color = "red"
-    // event.setAttribute('style', "backgroundColor: black")
+    event.target.setAttribute('style', "background-color: black")
 }
 
 function turn_off(event) {
-    event.setAttribute('style', "backgroundColor: black")
+    event.setAttribute('style', "background-color: white")
 }
 
 function reload() {
