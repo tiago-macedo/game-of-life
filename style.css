@@ -18,7 +18,6 @@ main > div {
 }
 
 #field {
-    border: 1px solid red;
     min-width: 100px;
     min-height: 100px;
 }
