@@ -1,31 +1,32 @@
 body {
     height: 100%;
+    text-align: center;
 }
 
 main {
-    /* margin: 5em 10em 5em 10em; */
+    margin: 5em 10em 5em 10em;
     min-height: 80%;
     border: 1px solid black;
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-#field {
-    border: 1px solid red;
-    flex: auto;
-    width: max-content;
-    min-width: 100px;
-    height: 100%;
-    min-height: 100px;
+    display: grid;
+    grid-template-columns: auto 300px;
+    overflow: scroll;
+    resize: both;
 }
 
 main > div {
     margin: 10px;
 }
 
+#field {
+    border: 1px solid red;
+    min-width: 100px;
+    min-height: 100px;
+}
+
 #panel {
+    vertical-align: center;
     text-align: right;
+    line-height: 2em;
 }
 
 .cell {
