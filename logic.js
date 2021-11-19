@@ -1,4 +1,20 @@
+// Utility functions
+//--------------------
+function matrix(y, x, e) {
+    if (typeof e === "object") e = null
+    const m = []
+    for (let j=0; j<y; j++) {
+        let row = []
+        m.push(row)
+        for (let i=0; i<x; i++) {
+            m[j].push(e)
+        }
+    }
+    return m
+}
+
 // Constants
+//------------
 const SELECTED_ALIVE = "DarkSlateBlue" // alive is darker
 const SELECTED_DEAD  = "SteelBlue"
 const NORMAL_ALIVE   = "black"
@@ -82,7 +98,8 @@ function step() {
             // of the cells surrounding the currtent
             // cell. It includes the state of the
             // middle cell.
-            pack = Array(3).fill(Array(3).fill(false))
+            // pack = Array(3).fill(Array(3).fill(false))
+            pack = matrix(3, 3, false)
 
             if (y > 0) { // We're not on the top row
                 if (x > 0)       pack[0][0] = cells[y-1][x-1].active
