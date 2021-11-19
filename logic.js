@@ -25,12 +25,14 @@ const NORMAL_DEAD    = "white"
 let cells
 let width
 let height
+let loop_caller
 
 // Getting the fixed DOM elements
 //---------------------------------
 const field        = document.getElementById("field")
 const width_input  = document.getElementById("width")
 const height_input = document.getElementById("height")
+let interval       = 0
 
 // Cell creator
 //------------------
@@ -79,14 +81,6 @@ function off(cell) {
 
 // Main game logic
 //-------------------
-function grid2arr(x, y) { return height*y + x }
-
-function arr2grid(k) {
-    y = Math.floor(k / width)
-    x = k % width
-    return [x, y]
-}
-
 function step() {
     const new_cells = []
 
@@ -117,10 +111,6 @@ function step() {
                 if (x < width-1) pack[2][2] = cells[y+1][x+1].active
             }
 
-            if (x == 1 && y == 1) {
-                console.log(pack)
-                console.log(`total: ${total}`)
-            }
             new_cells[y].push(update(pack))
         }
     }
@@ -157,6 +147,7 @@ function update(states) {
 // Field setup
 //--------------
 function reload() {
+    loop_caller = null
     field.textContent = ''
     
     width  = Number(width_input.value)
@@ -179,12 +170,24 @@ function reload() {
     }
 }
 
-// Button play/pause
+// Buttons
 //--------------------
-function play_or_pause(event) {
-    step()
+function play_or_pause() {
+    if (!loop_caller) {
+        loop_caller = setInterval(step, interval)
+    } else {
+        clearInterval(loop_caller)
+        loop_caller = null
+    }
+}
+
+function set_timestep() {
+    interval = Number(document.getElementById("interval").value)
+    play_or_pause()
+    play_or_pause()
 }
 
 // What to actually run when page is loaded
 //-------------------------------------------
-reload();
+set_timestep()
+reload()

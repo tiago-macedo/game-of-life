@@ -13,6 +13,7 @@
             <div id="field"></div>
             
             <div id="panel">
+                <!-- Dials -->
                 <label for="width">Largura</label> <br />
                 <input
                     type="number"
@@ -22,6 +23,7 @@
                     min="1"
                     onchange="reload()"
                 /> <br />
+
                 <label for="height">Altura</label> <br />
                 <input
                     type="number"
@@ -31,11 +33,30 @@
                     min="1"
                     onchange="reload()"
                 /> <br />
+
+                <label for="interval">Delay do passo (ms)</label> <br />
+                <input
+                    type="number"
+                    name="interval"
+                    id="interval"
+                    value="500"
+                    min="0"
+                    onchange="set_timestep()"
+                /> <br />
+
+                <!-- Buttons -->
                 <input
                     type="button"
                     id="play-pause"
                     value="[⏯] play/pause"
                     onclick="play_or_pause()"
+                /> <br />
+
+                <input
+                    type="button"
+                    id="step"
+                    value="[🚶] step"
+                    onclick="step()"
                 /> <br />
             </div>
         </main>
