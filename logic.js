@@ -19,6 +19,8 @@ const SELECTED_ALIVE = "DarkSlateBlue" // alive is darker
 const SELECTED_DEAD  = "SteelBlue"
 const NORMAL_ALIVE   = "black"
 const NORMAL_DEAD    = "white"
+const play_txt  = "[▶️] Play"
+const pause_txt = "[⏸] Pause"
 
 // Global variables
 //-------------------
@@ -32,6 +34,7 @@ let loop_caller
 const field        = document.getElementById("field")
 const width_input  = document.getElementById("width")
 const height_input = document.getElementById("height")
+const play_pause_button = document.getElementById("play-pause")
 let interval       = 0
 
 // Cell creator
@@ -173,18 +176,29 @@ function reload() {
 // Buttons
 //--------------------
 function play_or_pause() {
-    if (!loop_caller) {
-        loop_caller = setInterval(step, interval)
-    } else {
-        clearInterval(loop_caller)
-        loop_caller = null
+    if (!loop_caller) { // If it's not playing
+        play()
+    } else { // If it's playing
+        pause()
     }
 }
 
+function play() {
+    if (!loop_caller) loop_caller = setInterval(step, interval)
+    play_pause_button.value = pause_txt
+}
+
+function pause(button) {
+    if (loop_caller) clearInterval(loop_caller)
+    loop_caller = null
+    play_pause_button.value = play_txt
+}
+
 function set_timestep() {
+    currently_playing = !!loop_caller
+    if (currently_playing) pause()
     interval = Number(document.getElementById("interval").value)
-    play_or_pause()
-    play_or_pause()
+    if (currently_playing) play()
 }
 
 // What to actually run when page is loaded
