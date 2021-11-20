@@ -85,6 +85,7 @@ function off(cell) {
 // Main game logic
 //-------------------
 function step() {
+    console.log("step")
     const new_cells = []
 
     // First, we calculate the next states of the cells
@@ -199,6 +200,10 @@ function set_timestep() {
     if (currently_playing) pause()
     interval = Number(document.getElementById("interval").value)
     if (currently_playing) play()
+}
+
+function step_button() {
+    step()
 }
 
 // What to actually run when page is loaded
