@@ -28,6 +28,7 @@ let cells
 let width
 let height
 let loop_caller
+let planar = true
 
 // Getting the fixed DOM elements
 //---------------------------------
@@ -92,29 +93,7 @@ function step() {
     for (let y=0; y<height; y++) {
         new_cells.push([])
         for (let x=0; x<width; x++) {
-            // Let's create a 3x3 grid of the states
-            // of the cells surrounding the currtent
-            // cell. It includes the state of the
-            // middle cell.
-            // pack = Array(3).fill(Array(3).fill(false))
-            pack = matrix(3, 3, false)
-
-            if (y > 0) { // We're not on the top row
-                if (x > 0)       pack[0][0] = cells[y-1][x-1].active
-                                 pack[0][1] = cells[y-1][ x ].active
-                if (x < width-1) pack[0][2] = cells[y-1][x+1].active
-            }
-            
-            if (x > 0)       pack[1][0] = cells[y][x-1].active
-                             pack[1][1] = cells[y][ x ].active
-            if (x < width-1) pack[1][2] = cells[y][x+1].active
-
-            if (y < height-1) { // We're not on the bottom row
-                if (x > 0)       pack[2][0] = cells[y+1][x-1].active
-                                 pack[2][1] = cells[y+1][ x ].active
-                if (x < width-1) pack[2][2] = cells[y+1][x+1].active
-            }
-
+            let pack = planar ? planar_pack(x, y) : toroidal_pack(x, y)
             new_cells[y].push(update(pack))
         }
     }
@@ -132,6 +111,46 @@ function step() {
             }
         }
     }
+}
+
+// The following 2 functions create a 3x3 grid
+// of the states of the cells surrounding the
+// currtent cell. It includes the state of the
+// middle cell.
+//
+// One (planar) considers that the border cells
+// are surrounded by permanently dead cells.
+//
+// The other(toroidal) considerds that cells at
+// a border can reach through the border to the
+// cells at the other side.
+
+function planar_pack(x, y) {
+    pack = matrix(3, 3, false)
+
+    if (y > 0) { // We're not on the top row
+        if (x > 0)       pack[0][0] = cells[y-1][x-1].active
+                         pack[0][1] = cells[y-1][ x ].active
+        if (x < width-1) pack[0][2] = cells[y-1][x+1].active
+    }
+    
+    if (x > 0)       pack[1][0] = cells[y][x-1].active
+                     pack[1][1] = cells[y][ x ].active
+    if (x < width-1) pack[1][2] = cells[y][x+1].active
+
+    if (y < height-1) { // We're not on the bottom row
+        if (x > 0)       pack[2][0] = cells[y+1][x-1].active
+                         pack[2][1] = cells[y+1][ x ].active
+        if (x < width-1) pack[2][2] = cells[y+1][x+1].active
+    }
+
+    return pack
+}
+
+function toroidal_pack(x, y) {
+    pack = matrix(3, 3, false)
+
+    return pack
 }
 
 // Receives a matrix of (true/false) states
@@ -200,6 +219,14 @@ function set_timestep() {
     if (currently_playing) pause()
     interval = Number(document.getElementById("interval").value)
     if (currently_playing) play()
+}
+
+function set_planar() {
+    planar = true
+}
+
+function set_toroidal() {
+    planar = false
 }
 
 function step_button() {

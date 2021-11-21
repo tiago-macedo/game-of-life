@@ -39,10 +39,31 @@
                     type="number"
                     name="interval"
                     id="interval"
-                    value="500"
+                    value="100"
                     min="0"
                     onchange="set_timestep()"
                 /> <br />
+
+                <h4>Fronteiras do campo</h4>
+
+                <input
+                type="radio"
+                name="borders"
+                id="planar"
+                onclick="set_planar()"
+                checked
+                />
+                <label for="planar">Campo planar (cercado)</label>
+                <br>
+
+                <input
+                type="radio"
+                name="borders"
+                id="toroidal"
+                onclick="set_toroidal()"
+                />
+                <label for="toroidal">Campo toroidal (em loop)</label>
+                <br>
                 
                 <hr /> <!-- Configuration buttons -->
                 
