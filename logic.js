@@ -19,8 +19,8 @@ const SELECTED_ALIVE = "DarkSlateBlue" // alive is darker
 const SELECTED_DEAD  = "SteelBlue"
 const NORMAL_ALIVE   = "black"
 const NORMAL_DEAD    = "white"
-const play_txt  = "[▶️] Play"
-const pause_txt = "[⏸] Pause"
+const play_txt  = "▶️ Play"
+const pause_txt = "⏸ Pause"
 
 // Global variables
 //-------------------
@@ -204,6 +204,10 @@ function set_timestep() {
 
 function step_button() {
     step()
+}
+
+function clear_field() {
+    field.childNodes.forEach((cell) => { off(cell) })
 }
 
 // What to actually run when page is loaded

@@ -43,19 +43,29 @@
                     min="0"
                     onchange="set_timestep()"
                 /> <br />
+                
+                <hr /> <!-- Configuration buttons -->
+                
+                <input
+                    type="button"
+                    id="clear"
+                    value="🔲 Limpar"
+                    onclick="clear_field()"
+                /> <br />
 
-                <!-- Buttons -->
+                <hr /> <!-- Run buttons -->
+
                 <input
                     type="button"
                     id="play-pause"
-                    value="[▶️] Play"
+                    value="▶️ Play"
                     onclick="play_or_pause(event)"
                 /> <br />
 
                 <input
                     type="button"
                     id="step"
-                    value="[🚶] Step"
+                    value="🚶 Passo"
                     onclick="step_button()"
                 /> <br />
             </div>
