@@ -207,7 +207,17 @@ function step_button() {
 }
 
 function clear_field() {
-    field.childNodes.forEach((cell) => { off(cell) })
+    field.childNodes.forEach((cell) => { off(cell) })    
+}
+
+function randomize() {
+    field.childNodes.forEach((cell) => {
+        let value = !(Math.random() - 0.5 > 0)
+        // Techincally there is a slightly greater chance that the cell will
+        // be off than on, but oh well...
+        if (value) on(cell)
+        else off(cell)
+    })
 }
 
 // What to actually run when page is loaded
