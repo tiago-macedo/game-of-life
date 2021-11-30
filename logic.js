@@ -150,6 +150,40 @@ function planar_pack(x, y) {
 function toroidal_pack(x, y) {
     pack = matrix(3, 3, false)
 
+    if (y > 0) { // We're not on the top row
+        if (x > 0)       pack[0][0] = cells[y-1][x-1].active
+        else             pack[0][0] = cells[y-1][width-1].active
+                         pack[0][1] = cells[y-1][ x ].active
+        if (x < width-1) pack[0][2] = cells[y-1][x+1].active
+        else             pack[0][2] = cells[y-1][0].active
+    } else { // We're on the top row
+        if (x > 0)       pack[0][0] = cells[height-1][x-1].active
+        else             pack[0][0] = cells[height-1][width-1].active
+                         pack[0][1] = cells[height-1][ x ].active
+        if (x < width-1) pack[0][2] = cells[height-1][x+1].active
+        else             pack[0][2] = cells[height-1][0].active
+    }
+    
+    if (x > 0)       pack[1][0] = cells[y][x-1].active
+    else             pack[1][0] = cells[y][width-1].active
+                     pack[1][1] = cells[y][ x ].active
+    if (x < width-1) pack[1][2] = cells[y][x+1].active
+    else             pack[1][2] = cells[y][0].active
+
+    if (y < height-1) { // We're not on the bottom row
+        if (x > 0)       pack[2][0] = cells[y+1][x-1].active
+        else             pack[2][0] = cells[y+1][width-1].active
+                         pack[2][1] = cells[y+1][ x ].active
+        if (x < width-1) pack[2][2] = cells[y+1][x+1].active
+        else             pack[2][2] = cells[y+1][0].active
+    } else { // We're on the bottom row
+        if (x > 0)       pack[2][0] = cells[0][x-1].active
+        else             pack[2][0] = cells[0][width-1].active
+                         pack[2][1] = cells[0][ x ].active
+        if (x < width-1) pack[2][2] = cells[0][x+1].active
+        else             pack[2][2] = cells[0][0].active
+    }
+
     return pack
 }
 
