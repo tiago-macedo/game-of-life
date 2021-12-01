@@ -204,7 +204,6 @@ function update(states) {
 // Field setup
 //--------------
 function reload() {
-    loop_caller = null
     field.textContent = ''
     
     width  = Number(width_input.value)
